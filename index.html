@@ -3,21 +3,15 @@
 <html lang="vi">
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="icon" type="image/x-icon" href="./Static/Images/favicon.ico">
-    <link rel="stylesheet" href=".\Static\Libs\bootstrap-3.4.1-dist\css\bootstrap.min.css">
-
-    <!-- Other css -->
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <title>Đám cưới của Chú rể GroomName - Cô dâu BrideName</title>
+    <link rel="stylesheet" href=".\libs\bootstrap-3.4.1-dist\css\bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto" />
-    <link rel="stylesheet" href=".\Styles\addtocalendar.css">
-    <link rel="stylesheet" href=".\Styles\main-style.css">
-
-    <title>Đám cưới của Sơn - Hằng</title>
+    <link rel="stylesheet" href=".\styles\addtocalendar.css">
+    <link rel="stylesheet" href=".\styles\main-style.css">
 </head>
 
 <body>
@@ -120,15 +114,15 @@
                 </div>
 
                 <div class="wrapper-ts">
-                    <input type="radio" name="select" id="option-1" value="Nhà gái" checked="">
-                    <input type="radio" name="select" id="option-2" value="Nhà trai">
+                    <input type="radio" name="select" id="option-1" value="Bride" checked="">
+                    <input type="radio" name="select" id="option-2" value="Groom">
                     <label for="option-1" class="option option-1 activep">
                         <div class="dot">
                             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="38px"
                                 viewBox="0 0 335 455" enable-background="new 0 0 335 455" xml:space="preserve">
                                 <image id="image0" width="100%" height="100%" x="0" y="0"
-                                    href="./Static/Images/img-bride.png"></image>
+                                    href="./images/icons/img-bride.png"></image>
                             </svg>
                         </div>
                         <span>Khách nhà gái</span>
@@ -139,7 +133,7 @@
                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="46px" height="100%"
                                 viewBox="0 0 399 451" enable-background="new 0 0 399 451" xml:space="preserve">
                                 <image id="image0" width="100%" height="100%" x="0" y="0"
-                                    href="./Static/Images/img-broom.png"></image>
+                                    href="./images/icons/img-broom.png"></image>
                             </svg>
                         </div>
                         <span>Khách nhà trai</span>
@@ -158,9 +152,9 @@
                     <div class="box-invite mt-40">
                         <div class="box-icon-ts">
                             <div class="wrapper-ts-boxp">
-                                <input type="radio" name="selectboxp" id="option-1boxp" value="Tham dự" checked="">
-                                <input type="radio" name="selectboxp" id="option-2boxp" value="Có thể">
-                                <input type="radio" name="selectboxp" id="option-3boxp" value="Rất tiếc">
+                                <input type="radio" name="selectboxp" id="option-1boxp" value="Attend" checked="">
+                                <input type="radio" name="selectboxp" id="option-2boxp" value="Maybe">
+                                <input type="radio" name="selectboxp" id="option-3boxp" value="NotComing">
                                 <label for="option-1boxp" class="optionboxp option-1boxp ">
                                     <div class="dot">
                                         <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
@@ -286,13 +280,13 @@
                         <div>
                             <span class="font-18">Số người tham dự</span>
                             <select class="form-control" name="attendee_number">
-                                <option value="1">
+                                <option value="One">
                                     1 người
                                 </option>
-                                <option value="2">
+                                <option value="Two">
                                     2 người
                                 </option>
-                                <option value="Trên 2">
+                                <option value="Other">
                                     Trên 2 người
                                 </option>
                             </select>
@@ -324,21 +318,19 @@
 
                 <div class="stk text-center mt-16">
                     <div class="mb-8" style="display: flex; justify-content: center; ">
-                        <div class="ic-qr-bank-pnhang"></div>
+                        <div class="ic-qr-bank"></div>
                     </div>
                     <span>
-                        <b>Phan Nguyệt Hằng</b>
+                        <b id="bankAccountName">BankAccountName</b>
                     </span>
                     <br>
-                    <span>
-                        ACB - 19265537
-                    </span>
+                    <span id="bankAccountNumber">BankAccountNumber</span>
                 </div>
 
                 <hr class="dotted">
                 <div class="mt-20 momo">
-                    <a href="https://me.momo.vn/HappyWeddingforSonHang" target="_blank">
-                        <img src=".\Static\Images\momo2.png">
+                    <a class="momoLink" href="" target="_blank">
+                        <img src="./images/icons/momo2.png">
                     </a>
                 </div>
             </div>
@@ -346,7 +338,8 @@
             <!-- Địa chỉ -->
             <div class="mt-60 px-15">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1509.7970677849694!2d105.8150427802242!3d21.075515251788726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135aaede963b7e7%3A0x3945a8dcf037f761!2zVHJ1bmcgdMOibSBI4buZaSBuZ2jhu4sgVGnhu4djIGPGsOG7m2kgRm9yZXZlcm1hcms!5e0!3m2!1svi!2sus!4v1694883285986!5m2!1svi!2sus"
+                    id="ggMap"
+                    src=""
                     width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
@@ -358,10 +351,10 @@
                 <div class="mt-12">
                     <div class="col-xs-6">
                         <div class="text-center font-18">
-                            <div style="font-weight: 500;">Chú rể<br>Giang Sơn</div>
-                            <div class="mt-12">0396945990</div>
+                            <div style="font-weight: 500;">Chú rể<br><span class="groomName"></span></div>
+                            <div class="mt-12 bridePhoneNumber"></div>
                             <div class="mt-20" style="display: flex; justify-content: center;">
-                                <a href="tel:0396945990">
+                                <a class="bridePhoneNumber" href="tel:GroomPhoneNumber">
                                     <div class="ic-call"></div>
                                 </a>
                             </div>
@@ -370,10 +363,10 @@
 
                     <div class="col-xs-6">
                         <div class="text-center font-18">
-                            <div style="font-weight: 500;">Cô dâu<br>Nguyệt Hằng</div>
-                            <div class="mt-12">0867006966</div>
+                            <div style="font-weight: 500;">Cô dâu<br><span class="brideName"></span></div>
+                            <div class="mt-12 bridePhoneNumber"></div>
                             <div class="mt-20" style="display: flex; justify-content: center;">
-                                <a href="tel:0867006966">
+                                <a href="tel:BridePhoneNumber">
                                     <div class="ic-call"></div>
                                 </a>
                             </div>
@@ -385,19 +378,19 @@
         </div>
 
         <!-- Audio -->
-        <!-- <audio id="bg_audio" autoplay="true" loop="true">
-            <source src="https://github.com/JoinWithUs/ThiepCuoi/blob/main/Static/Audios/I_Do-Duc_Phuc.mp3?raw=true"
+        <audio id="bg_audio" autoplay="true" loop="true">
+            <source src="./audios/i_do-duc_phuc.mp3?raw=true"
                 type="audio/mp3">
-        </audio> -->
+        </audio>
     </div>
 
     <!-- Libs js -->
-    <script type="text/javascript" src=".\Static\Libs\jQuery\jQuery_3.7.0.min.js"></script>
-    <script type="text/javascript" src=".\Static\Libs\bootstrap-3.4.1-dist\js\bootstrap.min.js"></script>
+    <script type="text/javascript" src=".\libs\jQuery\jQuery_3.7.0.min.js"></script>
+    <script type="text/javascript" src=".\libs\bootstrap-3.4.1-dist\js\bootstrap.min.js"></script>
 
     <!-- Other js -->
-    <script type="text/javascript" src=".\JS\prototype.js"></script>
-    <script type="text/javascript" src=".\JS\main.js"></script>
+    <script type="text/javascript" src=".\js\prototype.js"></script>
+    <script type="text/javascript" src=".\js\main.js"></script>
 </body>
 
 </html>
