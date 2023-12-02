@@ -39,13 +39,21 @@ const AttendeeNumber = Object.freeze({
 })
 
 $(document).ready(function () {
+    playAudio();
     updateInfo(data);
-
     setupCounter(data);
     setupCalendar(data);
     setupPhotoGallery(data);
     setupResponseBox(data);
 });
+
+/**
+ * Phát nhạc
+ */
+playAudio = function() {
+    const audio = $('#bg_audio')[0];
+    audio && audio.play();
+}
 
 /**
  * Cập nhật thông tin
