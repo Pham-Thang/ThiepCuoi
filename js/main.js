@@ -1,367 +1,275 @@
-const data = {
-    groomName: 'Hồng Hạnh', // Tên chú rể
-    groomPhoneNumber: '0123456789', // SĐT chú rể
-    brideName: 'Hồng Hạnh', // Tên cô dâu
-    bridePhoneNumber: '0123456789', // SĐT cô dâu
-    time: "2024-01-18T17:00:00", // Ngày cưới
-    startTime: "2024-01-18T11:00:00", // Thời gian bắt đầu
-    endTime: "2024-01-18T12:00:00", // Thời gian kết thúc
-    location: '', // Địa điểm
-    slideImagePath: './images/slides/images/',
-    slideImageExtension: '.PNG',
-    slideThumbnailPath: './images/slides/thumbnails/',
-    slideThumbnailExtension: '.PNG',
-    photoGalleryImages: ["0", "1", "2", "3", "4", "5", "6", '7', "8", "9"],
-    ggSheetResponseUrl: "https://script.google.com/macros/s/AKfycbwTHZaR97m5E5ZG7Drts_EdvHREf4FOsOYB98LvbjGHXN8LWWQVL1nok_pHDmia7_it/exec", // Link exec gg script
-    bankAccountName: 'Phạm Thị Hồng Hạnh', // Tên TK ngân hàng
-    bankAccountNumber: '0000000', // Số TK ngân hàng
-    bankName: 'ACB', // Tên ngân hàng
-    momoLink: 'https://me.momo.vn/phamthang',
-    /** Đường dẫn nhúng gg map */
-    ggMapLink: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.1808373921294!2d105.7953435760691!3d21.065438386516178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135aadba34c8bed%3A0xad3a9c84de49ee8!2zTjAzLVQxIE5nb-G6oWkgR2lhbyDEkG_DoG4!5e0!3m2!1svi!2s!4v1701453395247!5m2!1svi!2s',
-}
+/*https://loktar00@github.com/loktar00/JQuery-Snowfall*/
+// document.write(`
+// <div style="z-index:999999;position: fixed;bottom: 0;width: 100%;font-size: 15px;padding: 10px 20px;background-color: #df4759;border-color: #df4759;color: #fff;">
+// 	<p class="text-center mb-0" style="color:#fff; margin:0;">
+// 		<strong>Thông báo!</strong> Chúng tôi tiếp tục đối mặt với sự cố dịch vụ lưu trữ hình ảnh. Biihappy đang mất niềm tin với nhà cung cấp dịch vụ hiện tại, nên chúng tôi sẽ chuyển đổi dữ liệu qua nhà cung cấp mới uy tín hơn. Cảm ơn bạn vì đã hiểu và chờ đợi chúng tôi!
+// 	</p>
+// </div>
+// `);
 
-const AttendStatus = Object.freeze({
-    NotComing: "NotComing", //: "Rất tiếc",
-    Maybe: "Maybe", // : "Có thể",
-    Attend: "Attend", // : "Tham dự",
+Date.now||(Date.now=function(){return(new Date).getTime()}),function(){"use strict";for(var e=["webkit","moz"],t=0;t<e.length&&!window.requestAnimationFrame;++t){var i=e[t];window.requestAnimationFrame=window[i+"RequestAnimationFrame"],window.cancelAnimationFrame=window[i+"CancelAnimationFrame"]||window[i+"CancelRequestAnimationFrame"]}if(/iP(ad|hone|od).*OS 6/.test(window.navigator.userAgent)||!window.requestAnimationFrame||!window.cancelAnimationFrame){var n=0;window.requestAnimationFrame=function(e){var t=Date.now(),i=Math.max(n+16,t);return setTimeout(function(){e(n=i)},i-t)},window.cancelAnimationFrame=clearTimeout}}();var snowFall=function(){function e(){var e={flakeCount:35,flakeColor:"#ffffff",flakeIndex:999999,minSize:1,maxSize:2,minSpeed:1,maxSpeed:5,round:!1,shadow:!1,collection:!1,image:!1,collectionHeight:40},t=[],n={},o=0,s=0,a=0,r=0,l=function(e,t){for(var i in t)e.hasOwnProperty(i)&&(e[i]=t[i])},h=function(e,t){return Math.round(e+Math.random()*(t-e))},m=function(e,t){for(var i in t)e.style[i]=t[i]+("width"==i||"height"==i?"px":"")},d=function(t,i,n){this.x=h(a,s-a),this.y=h(0,o),this.size=i,this.speed=n,this.step=0,this.stepSize=h(1,10)/100,e.collection&&(this.target=canvasCollection[h(0,canvasCollection.length-1)]);var r=null;e.image?(r=new Image,r.src=e.image):(r=document.createElement("div"),m(r,{background:e.flakeColor})),r.className="snowfall-flakes",m(r,{width:this.size,height:this.size,position:"absolute",top:this.y,left:this.x,fontSize:0,zIndex:e.flakeIndex}),e.round&&m(r,{"-moz-border-radius":~~e.maxSize+"px","-webkit-border-radius":~~e.maxSize+"px",borderRadius:~~e.maxSize+"px"}),e.shadow&&m(r,{"-moz-box-shadow":"1px 1px 1px #555","-webkit-box-shadow":"1px 1px 1px #555",boxShadow:"1px 1px 1px #555"}),t.tagName===document.body.tagName?document.body.appendChild(r):t.appendChild(r),this.element=r,this.update=function(){this.y+=this.speed,this.y>o-(this.size+6)&&this.reset(),this.element.style.top=this.y+"px",this.element.style.left=this.x+"px",this.step+=this.stepSize,this.x+=Math.cos(this.step),(this.x+this.size>s-a||this.x<a)&&this.reset()},this.reset=function(){this.y=0,this.x=h(a,s-a),this.stepSize=h(1,10)/100,this.size=h(100*e.minSize,100*e.maxSize)/100,this.element.style.width=this.size+"px",this.element.style.height=this.size+"px",this.speed=h(e.minSpeed,e.maxSpeed)}},f=function(){for(var e=0;e<t.length;e+=1)t[e].update();r=requestAnimationFrame(function(){f()})};return{snow:function(r,m){for(l(e,m),n=r,o=n.offsetHeight,s=n.offsetWidth,n.snow=this,"body"===n.tagName.toLowerCase()&&(a=25),window.addEventListener("resize",function(){o=n.clientHeight,s=n.offsetWidth},!0),i=0;i<e.flakeCount;i+=1)t.push(new d(n,h(100*e.minSize,100*e.maxSize)/100,h(e.minSpeed,e.maxSpeed)));f()},clear:function(){var e=null;e=n.getElementsByClassName?n.getElementsByClassName("snowfall-flakes"):n.querySelectorAll(".snowfall-flakes");for(var t=e.length;t--;)e[t].parentNode===n&&n.removeChild(e[t]);cancelAnimationFrame(r)}}}return{snow:function(t,i){if("string"==typeof i)if(t.length>0)for(var n=0;n<t.length;n++)t[n].snow&&t[n].snow.clear();else t.snow.clear();else if(t.length>0)for(var n=0;n<t.length;n++)(new e).snow(t[n],i);else(new e).snow(t,i)}}}();
+var SNOW_Picture = config.webroot + '/common/imgs/heart.png';
+var special_custom = ['646f6e3d778825e6f306667f', '64a04f6beb89a210fc07656a'];
+window.onload = (event) =>{
+	if(config.effect.type == 'none') return false;
+	setTimeout(function() {
+		if(config.effect.type == 'heart') {
+			let flakeCount = 30;
+			if (typeof config.template_id !== 'undefined' && special_custom.includes(config.template_id)) {
+				flakeCount = 5;
+				if(window.innerWidth <= 650) {
+					flakeCount = 3;
+				}
+			}
+			snowFall.snow(document.getElementsByTagName('body')[0], {image : SNOW_Picture, minSize: 15, maxSize:32, flakeCount:flakeCount, maxSpeed: 3, minSpeed: 1});
+		}else if(config.effect.type == 'snow') {
+			let flakeCount = 250;
+			if (typeof config.template_id !== 'undefined' && special_custom.includes(config.template_id)) {
+				flakeCount = 50;
+				if(window.innerWidth <= 1200) {
+					flakeCount = 30;
+				}
+				if(window.innerWidth <= 650) {
+					flakeCount = 25;
+				}
+			}
+			snowFall.snow(document.getElementsByTagName('body')[0], {round : true, shadow : true, flakeCount : flakeCount, minSize: 1, maxSize:8});
+		}else if(config.effect.type == 'custom') {
+			let effectSetting = config.effect.setting;
+			let minSpeed = (parseInt(effectSetting.speed) - 3);
+			if(minSpeed <= 0) minSpeed = 1;
+			snowFall.snow(document.getElementsByTagName('body')[0], {image : effectSetting.icon, minSize: effectSetting.minSize, maxSize:effectSetting.maxSize, flakeCount:effectSetting.number, maxSpeed: effectSetting.speed, minSpeed: minSpeed});
+		}
+	}, 300);
+	
+	if(document.getElementsByTagName('body')[0].clientHeight > window.innerHeight) {
+		setTimeout(() => {
+			document.querySelector('.mouse-scroll-on-mobile').style.visibility ="visible";
+		}, 800);
+	}
+};
+
+window.addEventListener('scroll',(event) => {
+	if(window.scrollY>50){
+		document.querySelector('.mouse-scroll-on-mobile').style.visibility ="hidden";
+	}		
 });
 
-const CustomerType = Object.freeze({
-    Bride: "Bride", // : "Nhà gái",
-    Groom: "Groom" // : "Nhà trai",
-})
+document.write(`
+	<style type=text/css>
+	.mouse-scroll-on-mobile{display:none;}
+	@media screen and (max-width: 576px){
+		.mouse-scroll-on-mobile{width:95px;height:30px;margin:0 0 0 -30px;position:fixed;right:calc(50% - 52px);bottom:80px;-webkit-animation:arrow .5s 1s infinite ease-in-out alternate;z-index:999;display:block!important;visibility:hidden}
+		.mouse-scroll-on-mobile:hover{-webkit-animation-play-state:paused}
+		.mouse-scroll-on-mobile .mouse-scroll-on-mobile-text{text-align:center;bottom:120px;position:absolute;left:1px;background:#fff;padding:5px 10px;border-radius:3px;font-size:15px;color: #000;}
+		.mouse-scroll-on-mobile .mouse-scroll-on-mobile-left{position:absolute;height:5px;width:30px;background:#de4659;-webkit-transform:rotate(240deg);bottom:80px;left:42px;-webkit-border-radius:4px;-webkit-transform-origin:5px 50%;-webkit-animation:leftArrow .5s 1s infinite ease-out alternate}
+		.mouse-scroll-on-mobile .mouse-scroll-on-mobile-right{position:absolute;height:5px;width:30px;background:#de4659;-webkit-transform:rotate(-60deg);bottom:80px;left:46px;-webkit-border-radius:4px;-webkit-transform-origin:5px 50%;-webkit-animation:rightArrow .5s 1s infinite ease-out alternate}}
+		@-webkit-keyframes arrow{0%{bottom:0}100%{bottom:40px}}
+		@-webkit-keyframes leftArrow{100%{-webkit-transform:rotate(225deg)}}
+		@-webkit-keyframes rightArrow{100%{-webkit-transform:rotate(-45deg)}}
+	</style>
+	<div class="mouse-scroll-on-mobile">
+		<div class="mouse-scroll-on-mobile-text">Kéo xuống</div>
+		<div class="mouse-scroll-on-mobile-left"></div>
+		<div class="mouse-scroll-on-mobile-right"></div>
+	</div>
 
-const AttendeeNumber = Object.freeze({
-    One: "One", // : "1 người",
-    Two: "Two", // : "2 người",
-    Other: "Other", // : "Trên 2 người",
-})
+`)
 
-$(document).ready(function () {
-    playAudio();
-    updateInfo(data);
-    setupCounter(data);
-    setupCalendar(data);
-    setupPhotoGallery(data);
-    setupResponseBox(data);
-});
-
-/**
- * Phát nhạc
- */
-playAudio = function() {
-    const audio = $('#bg_audio')[0];
-    audio && audio.play();
+if(config.alert && Object.keys(config.alert).length > 0 && config.alert.status == 1) {
+	setTimeout(function(){
+		Swal.fire({
+			title: config.alert.title,
+			html: config.alert.content,
+			showCloseButton: false,
+			showConfirmButton: false,
+			showCancelButton: true,
+			focusCancel: true,
+			cancelButtonText: (typeof config.alert.cancel_button_text != 'undefined' && config.alert.cancel_button_text != '') ? config.alert.cancel_button_text : 'Tắt thông báo',
+		});
+	}, config.alert.timeout);
 }
 
-/**
- * Cập nhật thông tin
- */
-updateInfo = function ({ bankAccountName, bankAccountNumber, bankName, ggMapLink, brideName, groomName, groomPhoneNumber, bridePhoneNumber, momoLink }) {
-    $('#bankAccountName').text(bankAccountName);
-    $('#bankAccountNumber').text(`${bankName} - ${bankAccountNumber}`);
-    $('#ggMap').attr('src', ggMapLink);
-    $('.groomName').text(groomName);
-    $('.brideName').text(brideName);
-    $('.groomPhoneNumber:not(a)').text(groomPhoneNumber);
-    $('a.groomPhoneNumber').attr('href', `tel:${groomPhoneNumber}`);
-    $('.bridePhoneNumber:not(a)').text(bridePhoneNumber);
-    $('a.bridePhoneNumber').attr('href', `tel:${bridePhoneNumber}`);
-    $('.momoLink').attr('href', momoLink);
+if(config.bgMusic){
+	var audioPlayer = document.createElement("AUDIO");
+	audioPlayer.style.display = "none";
+
+	setTimeout(function(){
+		if (audioPlayer.canPlayType("audio/mpeg")) {
+			audioPlayer.setAttribute("src", config.bgMusic);
+			document.getElementsByClassName("bii-player")[0].style.display = "block";
+		}
+		audioPlayer.volume = 0.3;
+		audioPlayer.setAttribute("controls", "controls");
+		document.body.appendChild(audioPlayer);
+	}, 1000);
+	
+	var myInterval = setInterval(function(){
+		if(document.querySelector(".bii-player")){
+			setTimeout(function(){
+				document.getElementsByClassName("bii-player")[0].classList.add("show-sec");
+			},2000);
+			setTimeout(function(){
+				document.getElementsByClassName("bii-player")[0].classList.remove("show-sec");
+			},7000);
+			clearInterval(myInterval);
+		}
+	}, 200);
+
+	function playPause() {
+		document.getElementsByClassName("bii-player")[0].classList.remove("show-sec");
+	    if (audioPlayer.paused) {
+			audioPlayer.play();
+			document.getElementById("playerVolumeOff").style.display = "none";
+			document.getElementById("playerVolumeOn").style.display = "block";
+		} else {
+			audioPlayer.pause(); 
+			document.getElementById("playerVolumeOff").style.display = "block";
+			document.getElementById("playerVolumeOn").style.display = "none";
+		}
+	}
+	document.write(`
+	<style type="text/css">
+	@-webkit-keyframes biilogo-pulse {
+	  from {
+	    -webkit-transform: scale3d(1, 1, 1);
+	    transform: scale3d(1, 1, 1);
+	  }
+	  50% {
+	    -webkit-transform: scale3d(0.95, 0.95, 0.95);
+	    transform: scale3d(0.95, 0.95, 0.95);
+	  }
+	  to {
+	    -webkit-transform: scale3d(1, 1, 1);
+	    transform: scale3d(1, 1, 1);
+	  }
+	}
+	
+	@keyframes biilogo-pulse {
+	  from {
+	    -webkit-transform: scale3d(1, 1, 1);
+	    transform: scale3d(1, 1, 1);
+	  }
+	  50% {
+	    -webkit-transform: scale3d(0.95, 0.95, 0.95);
+	    transform: scale3d(0.95, 0.95, 0.95);
+	  }
+	  to {
+	    -webkit-transform: scale3d(1, 1, 1);
+	    transform: scale3d(1, 1, 1);
+	  }
+	}
+	.bii-player{position: fixed;bottom: 70px;left: 50px;width: 40px;height: 40px;z-index:99999;display:none;}
+	.bii-player .playerIcon{cursor:pointer;display: block;width:40px;height:40px;-webkit-border-radius: 50%;-moz-border-radius: 50%;-o-border-radius: 50%;-ms-border-radius: 50%;border-radius: 50%;background-color: #df4758;padding-top: 7px;padding-left: 9px;position:absolute;z-index: 2;}
+	.bii-player:after{content: "";position: absolute;-webkit-border-radius: 50%;-moz-border-radius: 50%;-o-border-radius: 50%;-ms-border-radius: 50%;border-radius: 50%;z-index: -1;background-color: rgba(242, 59, 67, 0.3);width: 120%;height: 120%;left: -10%;top: -10%;-webkit-animation: biilogo-pulse 1s infinite;animation: biilogo-pulse 1s infinite;z-index: 1;}
+	.bii-player img{width: 100%;z-index: 99999;position: absolute;cursor:pointer;}
+	.bii-player.show-sec .bii-player-secondary{visibility: visible;}
+	.bii-player.show-sec .bii-player-secondary-content{ transform: translate3d(0, 0, 0);}
+	.bii-player-secondary{position: absolute;width: 310px;left: 25px;height: 50px;overflow: hidden;visibility: hidden;}
+	.bii-player-secondary-content{display: flex;align-items: center;cursor:pointer;user-select: none;position: absolute;width: 310px;left: -25px;background: #fff;height: 40px;padding: 8px 11px 8px 50px;border: 1px solid #df4759;border-radius: 30px;z-index: 1;font-size:14px;transform: translate3d(-100%, 0, 0);transition: transform 175ms ease;font-family: arial;font-weight: 200;color: #000;}
+	@media (max-width: 799px) {
+	  .bii-player{bottom: 30px;left: 20px;}
+	}
+	</style>
+	<div class="bii-player">
+		<div onclick="playPause();" class="bii-player-secondary"><div class="bii-player-secondary-content">Click vào đây nếu bạn muốn phát nhạc!</div></div>
+		<div onclick="playPause();" class="playerIcon">
+			<span id="playerVolumeOff">
+				<svg xmlns="http://www.w3.org/2000/svg" width="25" height="27" fill="#fff" class="bi bi-volume-mute-fill" viewBox="0 0 16 16">
+				  <path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zm7.137 2.096a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0z"/>
+				</svg>
+			</span>
+			<span style="display:none;" id="playerVolumeOn">
+				<svg xmlns="http://www.w3.org/2000/svg" width="25" height="27" fill="#fff" class="bi bi-volume-up-fill" viewBox="0 0 16 16">
+				  <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
+				  <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/>
+				  <path d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"/>
+				</svg>
+			</span>
+		</div>
+	</div>
+	`);
 }
 
-/**
- * Cài đặt bộ đếm thời gian
- */
-setupCounter = function ({ time }) {
-    var countDownDate = new Date(time).getTime();
-
-    // Update the count down every 1 second
-    var x = setInterval(function () {
-        // Get today's date and time
-        var now = new Date().getTime();
-
-        // Find the distance between now and the count down date
-        var distance = countDownDate - now;
-
-        // Time calculations for days, hours, minutes and seconds
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        if (parseInt(hours) < 10) {
-            hours = "0" + parseInt(hours);
-        }
-        if (parseInt(minutes) < 10) {
-            minutes = "0" + parseInt(minutes);
-        }
-        if (parseInt(seconds) < 10) {
-            seconds = "0" + parseInt(seconds);
-        }
-        if (parseInt(days) < 10) {
-            days = "0" + parseInt(days);
-        }
-
-        $(".day-left .num").html(days);
-        $(".hour-left .num").html(hours);
-        $(".minute-left .num").html(minutes);
-        $(".second-left .num").html(seconds);
-
-        // If the count down is over, write some text 
-        if (distance < 0) {
-            clearInterval(x);
-            $(".day-left .num").html('00');
-            $(".hour-left .num").html('00');
-            $(".minute-left .num").html('00');
-            $(".second-left .num").html('00');
-        }
-    }, 1000);
+if(!config.isPremium && !config.templatePremium) {
+	setTimeout(function(){
+		document.getElementsByClassName("bii-logo")[0].classList.add("show-sec");
+	}, 8000);
+	setTimeout(function(){
+		document.getElementsByClassName("bii-logo")[0].classList.remove("show-sec");
+	}, 11000);
+	setTimeout(function(){
+		document.getElementsByClassName("bii-logo")[0].classList.add("show-sec");
+	}, 25000);
+	setTimeout(function(){
+		document.getElementsByClassName("bii-logo")[0].classList.remove("show-sec");
+	}, 28000);
+	var biiLogo = config.webroot + '/common/imgs/bii.png'
+	var currentYear = new Date().getFullYear();
+	document.write(`
+	<style type="text/css">
+	@-webkit-keyframes biilogo-pulse {
+	  from {
+	    -webkit-transform: scale3d(1, 1, 1);
+	    transform: scale3d(1, 1, 1);
+	  }
+	  50% {
+	    -webkit-transform: scale3d(0.95, 0.95, 0.95);
+	    transform: scale3d(0.95, 0.95, 0.95);
+	  }
+	  to {
+	    -webkit-transform: scale3d(1, 1, 1);
+	    transform: scale3d(1, 1, 1);
+	  }
+	}
+	
+	@keyframes biilogo-pulse {
+	  from {
+	    -webkit-transform: scale3d(1, 1, 1);
+	    transform: scale3d(1, 1, 1);
+	  }
+	  50% {
+	    -webkit-transform: scale3d(0.95, 0.95, 0.95);
+	    transform: scale3d(0.95, 0.95, 0.95);
+	  }
+	  to {
+	    -webkit-transform: scale3d(1, 1, 1);
+	    transform: scale3d(1, 1, 1);
+	  }
+	}
+	.bii-logo{position: fixed;bottom: 70px;right: 50px;width: 40px;height: 40px;z-index:99998;}
+	.bii-logo a{display: block;}
+	.bii-logo:before{content: "";position: absolute;-webkit-border-radius: 50%;-moz-border-radius: 50%;-o-border-radius: 50%;-ms-border-radius: 50%;border-radius: 50%;z-index: -1;background-color: rgba(242, 59, 67, 0.3);width: 120%;height: 120%;left: -10%;top: -10%;-webkit-animation: biilogo-pulse 1s infinite;animation: biilogo-pulse 1s infinite;z-index: 1;}
+	.bii-logo img{width: 100%;z-index: 99999;position: absolute;cursor:pointer;}
+	.bii-logo:hover .bii-logo-secondary{visibility: visible;}
+	.bii-logo:hover .bii-logo-secondary-content{ transform: translate3d(0, 0, 0);}
+	.bii-logo.show-sec .bii-logo-secondary{visibility: visible;}
+	.bii-logo.show-sec .bii-logo-secondary-content{ transform: translate3d(0, 0, 0);}
+	
+	.bii-logo-secondary{position: absolute;width: 320px;right: 25px;height: 40px;overflow: hidden;visibility: hidden;}
+	.bii-logo-secondary-content{display: flex;align-items: center;position: absolute;width: 320px;right: -25px;background: #fff;height: 40px;padding: 8px 40px 8px 11px;border: 1px solid #df4759;border-radius: 30px;z-index: 9999;font-size:14px;transform: translate3d(100%, 0, 0);transition: transform 175ms ease;font-family: arial;font-weight: 200;color: #000;}
+	.bii-footer .show-desktop{display: inline-block;}
+	.bii-footer .show-mobile{display: none;}
+	@media (max-width: 799px) {
+	  .bii-logo{bottom: 30px;right: 20px;}
+	  .bii-footer .show-desktop{display: none;}
+	  .bii-footer .show-mobile{display: inline-block;}
+	}
+	</style>
+	<div class="bii-logo"><div class="bii-logo-secondary"><div class="bii-logo-secondary-content">Nền tảng tạo Website đám cưới miễn phí!</div></div><a href="${config.coreSite}/wedding" target="_blank"><img src="${biiLogo}" /></a></div>
+	<div class="bii-footer" style="z-index:9999;background-color: #000;border-top: 1px solid #df4759;color: #fff;text-align: center;letter-spacing: 1px;bottom: 0;width: 100%;font-size: 13px;">
+		<div class="container">
+			<a style="color:#fff;padding: 7px 0 9px;display: block;" href="https://biihappy.com/wedding" target="_blank">
+				<span><img width="16" src="${biiLogo}" style="border: 1px solid #fff;border-radius: 50%;width:16px!important;" /> IWedding</span> | <span class="show-desktop">Nền tảng tạo website đám cưới miễn phí từ Biihappy</span><span class="show-mobile">Tạo website đám cưới miễn phí</span>
+				<span style="line-height: 15px;vertical-align: middle;">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+					  <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+					</svg>
+				</span>
+			</a>
+		</div>
+	</div>
+	`);
 }
 
-/**
- * Cài đặt phần đặt lịch
- */
-setupCalendar = function ({ groomName, brideName, startTime, endTime }) {
-    var eventData = {
-        "title": `Lễ cưới của Chú rể ${groomName} và Cô dâu ${brideName}`,
-        "desc": `Thiệp cưới online của Chú rể ${groomName} và Cô dâu ${brideName}`,
-        "start": startTime,
-        "end": endTime,
-        "location": "",
-        "timezone": "Asia/Bangkok"
-    };
-    var formatTextParam = function (text) {
-        return text.replaceAll(" ", "+");
-    }
-    var formatDateParam = function (date) {
-        var tempDate = null;
-        var result = ""
-
-        if (typeof (date) == "string") {
-            tempDate = new Date(date);
-        }
-        if (typeof (date.getDate) == "function") {
-            tempDate = date;
-        }
-
-        if (tempDate) {
-            result = tempDate.formatDateTime();
-        }
-
-        return result.replaceAll("-", "").replaceAll(":", "");
-    }
-
-    var url = `https://calendar.google.com/calendar/u/0/r/eventedit?text=${formatTextParam(eventData.title)}
-    &dates=${formatDateParam(eventData.start) + "/" + formatDateParam(eventData.end)}&details=${eventData.desc}&location=${location}&ctz=${eventData.timezone}&output=xml`;
-
-    $('#btn_save_event').on('click', function () {
-        window.open(url);
-    });
-}
-
-/**
- * Cài đặt phần album ảnh
- */
-setupPhotoGallery = function ({ slideImagePath, slideThumbnailPath, photoGalleryImages, slideImageExtension, slideThumbnailExtension }) {
-    var slideIndex = 1;
-    var touchstartX = 0; // điểm bắt đầu
-    var touchendX = 0; // điểm kết thúc
-
-    // build ra danh sách các ảnh
-    for (var i = 0; i < photoGalleryImages.length; i++) {
-        var imgName = photoGalleryImages[i],
-            imgHtml = `<div class="mySlides">
-                <div class="wedding-image" style="background-image: url('` + `${slideImagePath}${imgName}${slideImageExtension}` + `');"></div>
-            </div>`;
-
-        $("#photo_gallery_page .slideshow-container").append(imgHtml);
-    }
-
-    for (var i = 0; i < photoGalleryImages.length; i++) {
-        var imgName = photoGalleryImages[i],
-            imgHtml = `<div class="thumbnail-wrapper">
-            <img class="demo cursor" src="` + `${slideThumbnailPath}${imgName}${slideThumbnailExtension}` + `" style="width:100%" thumbnail-index="` + (i + 1) + `">
-        </div>`;
-
-        $("#photo_gallery_page .thumbnail-images").append(imgHtml);
-    }
-
-    function plusSlides(n) {
-        slideIndex += n;
-
-        showSlides(slideIndex);
-
-        // Thực hiện focus tới thumbnail tương ứng
-        var dots = $("#photo_gallery_page .thumbnail-wrapper .demo");
-        var scrollArea = $("#photo_gallery_page .thumbnail-images");
-        var curDotRect = dots[slideIndex - 1].getBoundingClientRect(),
-            curDotLeft = curDotRect.left,
-            curDotWidth = curDotRect.width,
-            maxRight = scrollArea.width();
-
-        // bị ẩn bên trái
-        if (curDotLeft < 0) {
-            scrollArea.scrollLeft((slideIndex - 1) * curDotWidth);
-        }
-
-        // bị ẩn bên phải
-        if (curDotLeft + curDotWidth > maxRight) {
-            scrollArea.scrollLeft((slideIndex - 5) * curDotWidth);
-        }
-    }
-
-    function showSlides(n) {
-        var slides = $("#photo_gallery_page .mySlides");
-        var dots = $("#photo_gallery_page .thumbnail-wrapper .demo");
-
-        if (n > slides.length) {
-            slideIndex = 1;
-        }
-
-        if (n < 1) {
-            slideIndex = slides.length
-        }
-
-        for (var i = 0; i < slides.length; i++) {
-            $(slides[i]).hide();
-        }
-
-        for (i = 0; i < dots.length; i++) {
-            $(dots[i]).removeClass("active");
-        }
-
-        $(slides[slideIndex - 1]).show();
-        $(dots[slideIndex - 1]).addClass("active");
-    }
-
-    // Thực hiện event click
-    $("#photo_gallery_page .slideshow-container").on("click", ".prev", plusSlides.bind(this, -1));
-
-    $("#photo_gallery_page .slideshow-container").on("click", ".next", plusSlides.bind(this, 1));
-
-    $("#photo_gallery_page .thumbnail-images").on("click", "img.cursor", function (evt) {
-        slideIndex = parseInt(this.attributes["thumbnail-index"].value);
-
-        showSlides(slideIndex);
-    });
-
-    // Thực hiện event lướt
-    $("#photo_gallery_page .slideshow-container").on("touchstart", function (evt) {
-        touchstartX = evt.changedTouches[0].screenX;
-    });
-
-    $("#photo_gallery_page .slideshow-container").on("touchend", function (evt) {
-        touchendX = evt.changedTouches[0].screenX;
-
-        // swiped left
-        if (touchendX < touchstartX - 50) {
-            plusSlides(1);
-        }
-        // swiped right
-        if (touchendX - 50 > touchstartX) {
-            plusSlides(-1);
-        }
-    });
-
-    // hiển thị mặc định ảnh đầu tiên
-    showSlides(slideIndex);
-}
-
-/**
- * Cài đặt form phản hồi
- */
-setupResponseBox = function ({ ggSheetResponseUrl }) {
-    $(".form-control[name='customer_type']").val(CustomerType.Bride);
-    $(".form-control[name='attend_status']").val(AttendStatus.Attend);
-
-    // thêm các event
-    // event chọn loại khách
-    $("#response_box_page").on("click", "label.option", function (event) {
-        var rdId = $(event.currentTarget).attr("for");
-        var newVal = $(`input#${rdId}`).val();
-
-        $(".form-control[name='customer_type']").val(newVal);
-    });
-
-    // event chọn trạng thái tham gia
-    $("#response_box_page").on("click", "label.optionboxp", function (event) {
-        var rdId = $(event.currentTarget).attr("for");
-        var newVal = $(`input#${rdId}`).val();
-
-        if (newVal != AttendStatus.Attend) {
-            $("#response_box_page .element-hide-rap").hide();
-        }
-        else {
-            $("#response_box_page .element-hide-rap").show();
-        }
-
-        $(".form-control[name='attend_status']").val(newVal);
-    });
-
-    // event gửi phản hồi
-    $("#response_box_page").on("click", "#btn_send_response", function (event) {
-        var btnSend = this;
-        var data = getResponseBoxData();
-        var originMsg = "Gửi phản hồi";
-        var processingMsg = "Đang gửi phản hồi";
-        var successMsg = "Đã gửi phản hồi";
-        var errorMsg = "Bạn gửi phản hồi không thành công, vui lòng thử lại!";
-
-        if (!data["customer_name"]) {
-            alert("Vui lòng nhập Tên khách mời!");
-            $(".form-control[name='customer_name']").focus();
-        }
-        else {
-            $(btnSend).text(processingMsg);
-            $(btnSend).addClass("disabled");
-
-            $.ajax({
-                url: ggSheetResponseUrl,
-                method: "GET",
-                dataType: "json",
-                data: data,
-                success: function (response) {
-                    if (response["result"] == "success") {
-                        $(btnSend).text(successMsg);
-                    }
-                    else {
-                        $(btnSend).text(originMsg);
-                        $(btnSend).removeClass("disabled");
-                        alert(errorMsg);
-                    }
-                },
-                error: function () {
-                    $(btnSend).text(originMsg);
-                    $(btnSend).removeClass("disabled");
-                    alert(errorMsg);
-                }
-            });
-        }
-    });
-}
-
-/**
- * Lấy dữ liệu phản hồi từ khách mời
- */
-getResponseBoxData = function () {
-    var data = {
-        // customer_type
-        // customer_name
-        // attend_status
-        // attendee_number
-        // customer_wishes
-    }
-    var formFields = $("#response_box_page .form-control");
-
-    $.each(formFields, function (index, obj) {
-        var isVisible = $(obj).parents(".element-hide-rap").css("display") != "none",
-            key = $(obj).attr("name"),
-            value = isVisible ? $(obj).val() : "";
-
-        data[key] = value;
-    });
-
-    return data;
-}
+	
