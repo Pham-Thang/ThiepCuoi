@@ -463,6 +463,7 @@ header .navbar-brand {
   -webkit-perspective: 1000px;
   min-height: inherit;
 }
+.flip-card-inner-none,
 .flip-card-inner {
   position: relative;
   width: 100%;
@@ -515,6 +516,7 @@ header .navbar-brand {
     margin-bottom: 25px;
     min-height: inherit;
   }
+  .flip-card-inner-none,
   .flip-card-inner{
     width: 100%;
     min-height: 500px;
@@ -575,6 +577,37 @@ header .navbar-brand {
 }
 
 /* footer-section */
+
+.footer-section {
+  height: 100vh;
+}
+
+.footer-section .footer-section-inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-section .footer-section-inner .couple-pic {
+  background: url('../images/common/footer-couple-pic-frame.png') center center/contain no-repeat local;
+  width: 470px;
+  height: 470px;
+  max-width: calc(100vw - 48px);
+  max-height: calc(100vw - 48px);
+  position: relative;
+}
+
+.footer-section .footer-section-inner .couple-pic img {
+  object-fit: none;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  position: absolute;
+  left: 10%;
+  top: 7%;
+}
 
 .footer-section .title {
   color: #5b595a;
@@ -704,5 +737,6 @@ button#btn-submit-comment:hover {
 }
 
 .contact-section .contact-box > div {
-  width: 30%;
+  width: 40%;
+  max-width: 184px;
 }
